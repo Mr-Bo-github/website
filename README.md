@@ -13,6 +13,9 @@
 # 8.按下'S'后未计时就再多按几次可能会有延迟，游戏时间不限，主要以娱乐为主
 # 9.本已代码开源（下载地址：https://github.com/Mr-Bo-github/website/tree/石头剪刀布小游戏）
 # 10.下面就是正式程序了（！！！如果运行不了请看一下运行须知别BB！！！）
+
+
+...
 # 导入插件
 import random
 import cv2
