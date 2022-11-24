@@ -13,20 +13,17 @@
 # 8.按下'S'后未计时就再多按几次可能会有延迟，游戏时间不限，主要以娱乐为主
 # 9.本已代码开源（下载地址：https://github.com/Mr-Bo-github/website/tree/石头剪刀布小游戏）
 # 10.下面就是正式程序了（！！！如果运行不了请看一下运行须知别BB！！！）
-
 # 导入插件
 import random
 import cv2
 from cvzone.HandTrackingModule import HandDetector
 import time
-
 # 设置视频（摄像头）
 cap = cv2.VideoCapture(0)
 gege = cv2.VideoCapture(f'zy/0.mp4')
 # 不同设备（摄像头）设置统一视频显示大小
 cap.set(3, 640)
 cap.set(4, 480)
-
 # 识别手数量最大值
 detector = HandDetector(maxHands=1)
 # 定义（初始化）变量
@@ -36,7 +33,6 @@ startGame = False
 gegeztbf = 0
 # AI分数，玩家分数
 scores = [0, 0]
-
 # 主程序
 while True:
     # 背景将文件导入
@@ -56,23 +52,19 @@ while True:
     # 原创声明（右上角文本）
     cv2.putText(imgBG, "@ Originated_by_Mr_Bo", (1070, 15), cv2.FONT_HERSHEY_PLAIN, 1, (0, 0, 0), 3)
     cv2.putText(imgBG, "@ Originated_by_Mr_Bo", (1070, 15), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 1)
-
     # 手部识别
     hands, img = detector.findHands(imgScaled)
-
     # 游戏部分
     if startGame:
         # 游戏状态判断（倒计时）
         if stateResult is False:
             timer = time.time() - initialTime
             cv2.putText(imgBG, str(int(timer)), (600, 350), cv2.FONT_HERSHEY_PLAIN, 6, (0, 0, 255), 4)
-
             # 计时判断
             if timer > 3:
                 stateResult = True
                 # 重置时间
                 timer = 0
-
                 # 手指识别
                 if hands:
                     # 初始化
@@ -177,25 +169,20 @@ while True:
                         scores[0] += 1
                     # 检查（输出玩家与AI的游戏角色）
                     print("手指：", fingers, "判断：", playerMove, "AI：", randomNumber)
-
     # 视频显示位置
     imgBG[86:522, 851:1113] = imgScaled
     imgBG[86:522, 167:429] = imgScaled1
-
     # if stateResult:
     # imgBG = cvzone.overlayPNG(imgBG, imgAI, (85, 851))
-
     # VS分数显示
     cv2.putText(imgBG, str(scores[0]), (170, 560), cv2.FONT_HERSHEY_PLAIN, 3, (255, 255, 255), 6)
     cv2.putText(imgBG, str(scores[1]), (855, 560), cv2.FONT_HERSHEY_PLAIN, 3, (255, 255, 255), 6)
-
     # 设置摄像头
     # success, img = cap.read()
     # 显示窗口
     # cv2.imshow("Image", img)
     cv2.imshow("BG", imgBG)
     # cv2.imshow("Scaled", imgScaled)
-
     # 按键判断
     key = cv2.waitKey(1)
     # 开始游戏
